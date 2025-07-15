@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "vies-vat-checker": {
+      "command": "node",
+      "args": ["/absolute/path/to/check-vat-vies-mcp/dist/index.js"],
+      "env": {},
+      "description": "EU VAT number validation using VIES service"
+    }
+  }
+}

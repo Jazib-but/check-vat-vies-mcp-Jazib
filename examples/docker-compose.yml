@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  vies-vat-checker:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: vies-vat-checker-mcp
+    restart: unless-stopped
+    
+    # Environment variables (if needed)
+    environment:
+      - NODE_ENV=production
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('Health check')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.5'
+        reservations:
+          memory: 128M
+          cpus: '0.25'
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Security options
+    security_opt:
+      - no-new-privileges:true
+    
+    # Read-only root filesystem
+    read_only: true
+    
+    # Temporary filesystems
+    tmpfs:
+      - /tmp:noexec,nosuid,size=100m
