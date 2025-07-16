@@ -63,7 +63,7 @@ export class ViesApiClient {
       return {
         countryCode: validatedData.countryCode || params.countryCode,
         vatNumber: validatedData.vatNumber || params.vatNumber,
-        isValid: validatedData.isValid,
+        isValid: validatedData.valid,
         companyName: validatedData.name,
         companyAddress: validatedData.address,
         requestDate: validatedData.requestDate,
@@ -100,7 +100,7 @@ export class ViesApiClient {
       return {
         countryCode: validatedData.countryCode || params.countryCode,
         vatNumber: validatedData.vatNumber || params.vatNumber,
-        isValid: validatedData.isValid,
+        isValid: validatedData.valid,
         companyName: validatedData.name,
         companyAddress: validatedData.address,
         requestDate: validatedData.requestDate,

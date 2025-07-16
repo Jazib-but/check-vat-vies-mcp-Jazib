@@ -24,7 +24,7 @@ export const checkVatTestSchema = z.object({
 
 // VIES API response schemas
 export const vatValidationResponseSchema = z.object({
-  isValid: z.boolean(),
+  valid: z.boolean(),
   requestDate: z.string(),
   userError: z.string().optional(),
   name: z.string().optional(),

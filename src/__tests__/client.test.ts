@@ -30,7 +30,7 @@ describe('ViesApiClient', () => {
     it('should validate a VAT number successfully', async () => {
       const mockResponse = {
         data: {
-          isValid: true,
+          valid: true,
           requestDate: '2024-01-01T10:00:00Z',
           name: 'Test Company',
           address: 'Test Address',
@@ -68,7 +68,7 @@ describe('ViesApiClient', () => {
     it('should handle invalid VAT number', async () => {
       const mockResponse = {
         data: {
-          isValid: false,
+          valid: false,
           requestDate: '2024-01-01T10:00:00Z',
           countryCode: 'SK',
           vatNumber: '1234567890',
@@ -94,7 +94,7 @@ describe('ViesApiClient', () => {
     it('should test with valid test VAT number', async () => {
       const mockResponse = {
         data: {
-          isValid: true,
+          valid: true,
           requestDate: '2024-01-01T10:00:00Z',
           countryCode: 'SK',
           vatNumber: '100',
@@ -122,7 +122,7 @@ describe('ViesApiClient', () => {
     it('should test with invalid test VAT number', async () => {
       const mockResponse = {
         data: {
-          isValid: false,
+          valid: false,
           requestDate: '2024-01-01T10:00:00Z',
           countryCode: 'SK',
           vatNumber: '200',

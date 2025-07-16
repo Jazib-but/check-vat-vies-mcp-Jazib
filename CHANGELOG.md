@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2025-07-16
+
+### Fixed
+- **Critical Bug Fix**: Fixed VIES API response schema validation error
+  - Changed schema field from `isValid` to `valid` to match actual VIES REST API response format
+  - Updated client code to use correct field name (`validatedData.valid` instead of `validatedData.isValid`)
+  - Fixed unit tests to use correct mock data format
+  - Resolves validation errors when checking Slovak VAT numbers (e.g., SK7020000130)
+  - All EU VAT number validations now work correctly without Zod validation errors
+
+### Technical Changes
+- Updated `vatValidationResponseSchema` in `src/schemas.ts`
+- Updated `checkVatNumber` and `checkVatTestService` methods in `src/client.ts`
+- Updated test mock data in `src/__tests__/client.test.ts`
+- All tests now pass successfully
+
 ## [1.0.0] - 2024-01-15
 
 ### Added
