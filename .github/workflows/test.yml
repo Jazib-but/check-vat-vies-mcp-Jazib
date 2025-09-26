@@ -1,0 +1,51 @@
+name: Test API
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js 18
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build TypeScript
+      run: npm run build
+
+    - name: Run tests
+      run: npm test --if-present
+
+    - name: Start API and test endpoints
+      run: |
+        # Start the API in background
+        node api-server.js &
+        API_PID=$!
+
+        # Wait for API to start
+        sleep 5
+
+        # Test health endpoint
+        curl -f http://localhost:3000/health || exit 1
+
+        # Test member states endpoint
+        curl -f http://localhost:3000/api/member-states || exit 1
+
+        # Test validation endpoint
+        curl -f -X POST http://localhost:3000/api/validate/auto \
+          -H "Content-Type: application/json" \
+          -d '{"vat":"DE123456789"}' || exit 1
+
+        # Kill the API process
+        kill $API_PID

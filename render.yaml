@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: vat-validation-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile.api
+    repo: https://github.com/jazib/check-vat-vies-mcp
+    branch: main
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /health
+    autoDeploy: true
