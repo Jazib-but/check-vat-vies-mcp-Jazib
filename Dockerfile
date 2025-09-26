@@ -5,14 +5,20 @@ WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
+COPY tsconfig.json ./
 
-# Install all dependencies (including express, cors, etc.)
-RUN npm ci --omit=dev
+# Install ALL dependencies (including devDependencies for building)
+RUN npm ci
 
-# Copy API server and source files
-COPY api-server.js ./
+# Copy source files
 COPY src ./src
-COPY dist ./dist
+COPY api-server.js ./
+
+# Build TypeScript
+RUN npm run build
+
+# Remove devDependencies after build
+RUN npm prune --production
 
 # Create .env file placeholder
 RUN touch .env
